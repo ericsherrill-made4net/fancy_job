@@ -1,8 +1,5 @@
 on:
-  workflow_run:
-    workflows:
-      - CI-CD
-    types: [completed]
+  push
 
 jobs:
   otel-export-trace:
