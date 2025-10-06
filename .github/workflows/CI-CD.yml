@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
+          uv venv
           uv pip install -e .[llm]
 
       - name: Run update script
