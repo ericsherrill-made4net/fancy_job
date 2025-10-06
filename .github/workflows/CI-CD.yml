@@ -1,15 +1,32 @@
+name: Daily Number Update
+
 on:
-  push
+  workflow_dispatch:
+  schedule:
+    # Runs every day at 2:00 AM UTC
+    - cron: "0 2 * * *"
 
 jobs:
-  otel-export-trace:
-    name: OpenTelemetry Export Trace
+  update-number:
     runs-on: ubuntu-latest
     steps:
-      - name: Export Workflow Trace
-        uses: corentinmusard/otel-cicd-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          otlpEndpoint: ${{ secrets.DASH0_OTLP_ENDPOINT }}
-          otlpHeaders: ${{ secrets.DASH0_OTLP_HEADERS }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          runId: ${{ github.event.workflow_run.id }}
+          # We need to fetch all history and branches so that git push works correctly
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv pip install -e .[llm]
+
+      - name: Run update script
+        env:
+          FANCY_JOB_USE_LLM: true
+        run: uv run python update_number.py
