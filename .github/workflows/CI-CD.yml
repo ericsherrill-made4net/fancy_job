@@ -1,5 +1,8 @@
 name: Daily Number Update
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   schedule:
