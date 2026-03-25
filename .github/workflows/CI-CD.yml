@@ -1,7 +1,7 @@
 name: Daily Number Update
 
 permissions:
-  contents: read
+  contents: write
 
 on:
   workflow_dispatch:
