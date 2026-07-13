@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "transformers==5.13.1",
-    "huggingface-hub==1.19.0",
+    "huggingface-hub==1.23.0",
 ]
 [project.optional-dependencies]
 llm = [
