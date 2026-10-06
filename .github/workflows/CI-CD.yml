@@ -1,7 +1,6 @@
 name: Daily Number Update
 
-permissions:
-  contents: write
+permissions: {}
 
 on:
   workflow_dispatch:
@@ -12,6 +11,8 @@ on:
 jobs:
   update-number:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
