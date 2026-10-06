@@ -27,10 +27,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv venv
-          uv pip install -e .[llm]
+          uv sync --locked --extra llm
 
       - name: Run update script
         env:
           FANCY_JOB_USE_LLM: true
-        run: uv run python update_number.py
+        run: uv run --locked --extra llm python update_number.py
