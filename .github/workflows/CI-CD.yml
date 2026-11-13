@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv sync --locked --extra llm
+          uv sync --extra llm
 
       - name: Run update script
         env:
